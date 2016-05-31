@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lenovo.testclasses">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name=".App">
+        <activity
+            android:name="com.example.lenovo.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.example.lenovo.activity.RegisterAccountActivity"
+            android:label="@string/register_title" />
+
+        <activity
+            android:name="com.example.lenovo.activity.admin.StartupAdminActivity"
+            android:label="Start" />
+
+        <activity
+            android:name="com.example.lenovo.activity.student.StartupStudentActivity"
+            android:label="Start" />
+
+
+        <activity
+            android:name="com.example.lenovo.activity.MainActivity"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name="com.example.lenovo.activity.admin.TestViewAdminActivity"
+            android:label="Test Admin" />
+
+        <activity
+            android:name="com.example.lenovo.activity.admin.StatisticsAdminActivity"
+            android:label="Test statistics" />
+        <activity
+            android:name="com.example.lenovo.activity.student.StatisticsStudentActivity"
+            android:label="Student test statistics" />
+        <activity
+            android:name="com.example.lenovo.activity.ForgotPasswordActivity"
+            android:label="Forgot Password" />
+
+        <activity
+            android:name="com.example.lenovo.activity.ChangePasswordActivity"
+            android:label="Change Password" />
+
+        <activity
+            android:name="com.example.lenovo.activity.admin.StartTestAdminActivity"
+            android:label="Start Test" />
+
+        <activity
+            android:name="com.example.lenovo.activity.admin.QuestionsAdminActivity"
+            android:label="Questions" />
+        <activity
+            android:name="com.example.lenovo.activity.admin.TestGradesViewAdminActivity"
+            android:label="Grades of class" />
+
+        <activity
+            android:name="com.example.lenovo.activity.student.StudentTestActivity"
+            android:label="Test" />
+    </application>
+
+
+
+</manifest>

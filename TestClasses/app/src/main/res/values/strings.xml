@@ -1,0 +1,36 @@
+<resources>
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+    <string name="save_email">Save E-Mail</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="invalid_login">Invalid user or password.</string>
+
+    <!--Register-->
+    <string name="register_title">Register</string>
+    <string name="register_button">Register</string>
+    <string name="password_forgot">Forgot your password?</string>
+    <string name="accept_terms">Accept Terms, Conditions &amp; Policy</string>
+    <string name="birthday_hint">Birthday</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_member">Already a member? Login</string>
+    <string name="invalid_email_message">Not a valid email address!</string>
+    <string name="invalid_password_message">Not a valid password!</string>
+    <string name="name_hint">Name</string>
+    <string name="street_hint">Street</string>
+    <string name="city_hint">City</string>
+    <string name="invalid_input_message">Please complete this field!</string>
+    <string name="mobile_hint">Mobile</string>
+    <string name="zip_code_hint">ZipCode</string>
+    <string name="password_match_message">Password does not match!</string>
+    <string name="email_hint">Email</string>
+    <string name="unknown_api_error">An unexpected error occurred</string>
+    <string name="app_name">Main Activity</string>
+    <string name="invalid_register">Invalid register form.</string>
+    <string name="identity_number_hint">Identity Number</string>
+    <string name="nationality_hint">Nationality</string>
+    <string name="classes_hint">Class</string>
+    <string name="classes_prompt">Class</string>
+</resources>

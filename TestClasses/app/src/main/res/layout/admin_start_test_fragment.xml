@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/test_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+       android:textSize="25dp"
+        android:textColor="@color/blue"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Title" />
+
+
+    <TextView
+        android:id="@+id/test_date_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/blue"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/test_classname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/blue"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/test_opened"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/blue"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Title" />
+
+    <TextView
+    android:id="@+id/test_numberOfQuestions"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:textColor="@color/blue"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:text="Title" />
+
+    <TextView
+        android:id="@+id/test_firstQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/blue"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Title" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/start_test_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/medium_margin"
+        android:text="Start Test" />
+
+</LinearLayout>
