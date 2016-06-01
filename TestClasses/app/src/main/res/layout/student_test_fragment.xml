@@ -43,24 +43,12 @@
 
         <Button
             android:id="@+id/submit_answer_button"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:text="Submit Answer" />
-
-        <Button
-            android:id="@+id/next_question_button"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:visibility="visible"
-            android:text="Next Question"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/submit_answer_button" />
 
 
     </RelativeLayout>

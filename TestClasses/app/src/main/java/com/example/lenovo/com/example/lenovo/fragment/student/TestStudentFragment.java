@@ -68,8 +68,6 @@ public class TestStudentFragment extends BaseFragment {
     NonSwipebaleViewPager selectQuestion;
     @Bind(R.id.submit_answer_button)
     Button submitAnswer;
-    @Bind(R.id.next_question_button)
-    Button nextQuestion;
     @Bind(R.id.pager_layout)
     RelativeLayout pagerLayout;
     List<QuestionAndroid> questions = new ArrayList<QuestionAndroid>();
@@ -82,7 +80,6 @@ public class TestStudentFragment extends BaseFragment {
     CheckBox secondAnswer;
     CheckBox thirdAnswer;
     CheckBox fourthAnswer;
-
 
 
     @Override
@@ -109,46 +106,45 @@ public class TestStudentFragment extends BaseFragment {
     }
 
 
-private void nextQuestion(){
-    if (questions.size() - 1 == selectQuestion.getCurrentItem()) {
-        Intent startupStudentActivityIntent = new Intent(getActivity(), StartupStudentActivity.class);
-        startActivity(startupStudentActivityIntent);
-        getActivity().finish();
-    } else {
-        QuestionAndroid question = questions.get(selectQuestion.getCurrentItem() + 1);
-        runCall(apis.verifyIfQuestionIsAvailable(question.getQuestionId())).enqueue(new Callback<QuestionResponse>() {
-            @Override
-            public void onResponse(Call<QuestionResponse> call, Response<QuestionResponse> response) {
-                if (response.isSuccess()) {
-                    QuestionResponse questionResponse = response.body();
-                    if (questionResponse.isAvailability())
-                        selectQuestion.setCurrentItem(selectQuestion.getCurrentItem() + 1);
-                    else {
-                        Log.d("AICI VA FI UN MESAJ", "NEAPARAT");
+    private void nextQuestion() {
+
+
+        if (questions.size() - 1 != selectQuestion.getCurrentItem()) {
+            QuestionAndroid question = questions.get(selectQuestion.getCurrentItem() + 1);
+            runCall(apis.verifyIfQuestionIsAvailable(question.getQuestionId())).enqueue(new Callback<QuestionResponse>() {
+                @Override
+                public void onResponse(Call<QuestionResponse> call, Response<QuestionResponse> response) {
+                    if (response.isSuccess()) {
+                        QuestionResponse questionResponse = response.body();
+                        if (questionResponse.isAvailability())
+                            selectQuestion.setCurrentItem(selectQuestion.getCurrentItem() + 1);
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<QuestionResponse> call, Throwable t) {
+                @Override
+                public void onFailure(Call<QuestionResponse> call, Throwable t) {
 
-            }
-        });
-        submitAnswer.setEnabled(true);
+                }
+            });
+            submitAnswer.setEnabled(true);
+        }
     }
-}
-    private void reapeat(){
 
+
+    private void reapeat() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d("NU", "DA");
-                nextQuestion();
-                handler.postDelayed(this, 2000);
+                if (questions.size() - 1 != selectQuestion.getCurrentItem()) {
+                    nextQuestion();
+                    Log.d("DA", "DA");
+                    handler.postDelayed(this, 5000);
+                }
             }
         }, 3000);
     }
+
     private void updateView() {
         progressBar.setVisibility(View.GONE);
         pagerLayout.setVisibility(View.VISIBLE);
@@ -162,8 +158,8 @@ private void nextQuestion(){
                 } else {
                     //The current page is the last one
                     if (position == questions.size() - 1) {
-                        nextQuestion.setText("Finish test");
-                        nextQuestion.setBackgroundColor(Color.parseColor("#FF0000"));
+                        submitAnswer.setText("Finish test");
+                        submitAnswer.setBackgroundColor(Color.parseColor("#FF0000"));
                     }
                 }
             }
@@ -182,16 +178,15 @@ private void nextQuestion(){
     }
 
     public void getQuestions() {
-        runCall(apis.getQuestionsWithTestId(testId,token)).enqueue(new Callback<ListQuestionsTokenResponse>() {
+        runCall(apis.getQuestionsWithTestId(testId, token)).enqueue(new Callback<ListQuestionsTokenResponse>() {
             @Override
             public void onResponse(Call<ListQuestionsTokenResponse> call, Response<ListQuestionsTokenResponse> response) {
                 if (response.isSuccess()) {
-                    ListQuestionsTokenResponse tokenResponse=response.body();
-                    if(tokenResponse.getTokenResponse().isAvailability()) {
+                    ListQuestionsTokenResponse tokenResponse = response.body();
+                    if (tokenResponse.getTokenResponse().isAvailability()) {
                         questions = tokenResponse.getQuestions();
                         updateView();
-                    }
-                    else{
+                    } else {
                         Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
                         startActivity(loginActivity);
                         getActivity().finish();
@@ -206,35 +201,6 @@ private void nextQuestion(){
         });
     }
 
-    @OnClick(R.id.next_question_button)
-    public void onClickButton() {
-        if (questions.size() - 1 == selectQuestion.getCurrentItem()) {
-            Intent startupStudentActivityIntent = new Intent(getActivity(), StartupStudentActivity.class);
-            startActivity(startupStudentActivityIntent);
-            getActivity().finish();
-        } else {
-            QuestionAndroid question = questions.get(selectQuestion.getCurrentItem() + 1);
-            runCall(apis.verifyIfQuestionIsAvailable(question.getQuestionId())).enqueue(new Callback<QuestionResponse>() {
-                @Override
-                public void onResponse(Call<QuestionResponse> call, Response<QuestionResponse> response) {
-                    if (response.isSuccess()) {
-                        QuestionResponse questionResponse = response.body();
-                        if (questionResponse.isAvailability())
-                            selectQuestion.setCurrentItem(selectQuestion.getCurrentItem() + 1);
-                        else {
-                            Log.d("AICI VA FI UN MESAJ", "NEAPARAT");
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<QuestionResponse> call, Throwable t) {
-
-                }
-            });
-            submitAnswer.setEnabled(true);
-        }
-    }
 
     @OnClick(R.id.submit_answer_button)
     public void submitAnswer() {
@@ -246,7 +212,6 @@ private void nextQuestion(){
                     if (testResponse.isAvailability()) {
 
                         TextView name = (TextView) selectQuestion.findViewWithTag("name");
-                        Log.d("NUMEEEEEEEEEEE", name.getText().toString());
                         firstAnswer = (CheckBox) selectQuestion.findViewWithTag("firstAnswer" + selectQuestion.getCurrentItem());
                         secondAnswer = (CheckBox) selectQuestion.findViewWithTag("secondAnswer" + selectQuestion.getCurrentItem());
                         thirdAnswer = (CheckBox) selectQuestion.findViewWithTag("thirdAnswer" + selectQuestion.getCurrentItem());
@@ -295,6 +260,11 @@ private void nextQuestion(){
                             studentAnswers.add(studentResponse);
                         }
                         respondToQuestion(studentAnswers);
+                        if (selectQuestion.getCurrentItem() == questions.size() - 1) {
+                            Intent questionsStart = new Intent(getActivity(), StartupStudentActivity.class);
+                            startActivity(questionsStart);
+                            getActivity().finish();
+                        }
                     } else {
                         Intent questionsStart = new Intent(getActivity(), StartupStudentActivity.class);
                         startActivity(questionsStart);
@@ -312,7 +282,7 @@ private void nextQuestion(){
     }
 
     public void respondToQuestion(List<StudentAnswerResponse> studentResponse) {
-        StudentAnswerToken studentAnswerToken=new StudentAnswerToken();
+        StudentAnswerToken studentAnswerToken = new StudentAnswerToken();
         studentAnswerToken.setUserId(userId);
         studentAnswerToken.setToken(token);
         studentAnswerToken.setStudentResponse(studentResponse);
